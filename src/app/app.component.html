@@ -1,37 +1,44 @@
-
 <div class="container">
-  <header>
-      <h1> Exibindo resultados de busca por <span class="text-nowrap"> "Covid 19" </span></h1>
-      <span> Encontramos um total de 20 resultados para sua busca </span>
-  </header>
-  <main id="content">
-      <section id="section-flex">
-          <div class="card" *ngFor="let noticia of noticias">
-              <img src={{noticia.image}} alt="Como é transmitido o coronavírus?">
-              <div class="card-body">
-                  <h3> {{noticia.title}} </h3>
-                  <p>{{noticia.body}}</p>
-                  <a href="#"> Ler mais </a>
-              </div>
-          </div>
-       
-      </section>
-  </main>
-  <aside>
-      <nav>
-          <span class="small"> Categorias </span>
-          <ul class="categorias">
-              <li> Lorem ipsum dolor </li>
-              <li> Lorem ipsum dolor </li>
-              <li> Lorem ipsum dolor </li>
-              <li> Lorem ipsum dolor </li>
-          </ul>
-      </nav>
-      <div class="box-search">
-          <span class="small"> Procurando alguma notícia? </span>
-          <input class="search" placeholder="Pesquisar por...">
-          <i class="fa fa-search placeholder-icon"></i>
-      </div>
-  </aside>
+    <header>
+        <h1> Notícias </h1>
+        <span> Encontramos um total de {{total}} resultados para sua busca </span>
+    </header>
+    <main id="content">
+        <section id="section-flex">
+            <div class="card" *ngFor="let noticia of noticias">
+                <div class='card-image'>
+                    <img [src]="noticia.image" *ngIf="noticia.image" onError="this.src = 'assets/img/noimage.jpg'"
+                        alt={{noticia.title}}>
+                </div>
+                <div class="card-body">
+                    <div class="titulo">
+                        <h3 *ngIf="noticia.title"> {{noticia.title}} </h3>
+                    </div>
+                    <div class="corpo">
+                        <p *ngIf="noticia.body">{{noticia.body.substring(0, 120)}}...</p>
+                    </div>
+                    <div class="lermais">
+                        <a href="#"> Ler mais </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <aside>
+        <nav>
+            <span class="small"> Categorias </span>
+            <ul class="categorias">
+                <li> Lorem ipsum dolor </li>
+                <li> Lorem ipsum dolor </li>
+                <li> Lorem ipsum dolor </li>
+                <li> Lorem ipsum dolor </li>
+            </ul>
+        </nav>
+        <div class="box-search">
+            <span class="small"> Procurando alguma notícia? </span>
+            <input #titulo (keyup)="getNoticiaBusca(titulo.value)" class="search" placeholder="Pesquisar por...">
+            <i class="fa fa-search placeholder-icon"></i>
+        </div>
+    </aside>
 </div>
 <router-outlet></router-outlet>

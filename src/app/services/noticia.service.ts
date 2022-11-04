@@ -7,6 +7,7 @@ import { Noticia } from '../models/noticia';
 @Injectable({
   providedIn: 'root'
 })
+
 export class NoticiaService {
   url = 'https://5cf9ae9df26e8c00146cff8d.mockapi.io/api/v1/post/'; // api rest fake
   // injetando o HttpClient
@@ -20,6 +21,13 @@ export class NoticiaService {
   // Obtem todos os carros
   getNoticias(): Observable<Noticia[]> {
     return this.httpClient.get<Noticia[]>(this.url)
+      .pipe(
+        retry(2),
+        catchError(this.handleError))
+  }
+
+  getNoticiaBusca(params: string): Observable<Noticia[]> {
+    return this.httpClient.get<Noticia[]>(this.url + '?title=' + params)
       .pipe(
         retry(2),
         catchError(this.handleError))
