@@ -1,4 +1,7 @@
 # SiteNoticias
+Um site de notícias, criado em angular 14+. 
+Consumo de api para listar as notícias 
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.7.
 
 # Como instalar
